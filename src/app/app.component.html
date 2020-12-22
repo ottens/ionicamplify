@@ -10,7 +10,8 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-input placeholder="ToDo" [(ngModel)]="newTodo"></ion-input>
-      <ion-button (click)="createTodo()">Add Data</ion-button>
+      <ion-button (click)="createTodo()">Add Todo</ion-button>
+      <ion-button (click)="reloadTodos()">Reload</ion-button>
       <ion-list>
         <ion-item *ngFor="let item of todos">
           <ion-label>{{item.name}} - {{item.description}}</ion-label>
@@ -20,6 +21,7 @@
           </ion-button>
         </ion-item>
       </ion-list>
+      <app-camera></app-camera>
       <amplify-sign-out></amplify-sign-out>
     </ion-content>
   </ion-app>

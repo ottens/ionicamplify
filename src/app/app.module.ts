@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { Camera } from '@ionic-native/camera/ngx';//import in app.module.ts
+// import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -13,13 +14,14 @@ import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
 // import awsconfig from '../aws-exports';
 import { AppComponent } from './app.component';
+import { CameraComponent } from './camera/camera.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 
 // Amplify.configure(awsconfig);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CameraComponent],
   entryComponents: [],
   imports: [
     AmplifyUIAngularModule,
@@ -27,11 +29,13 @@ import { environment } from '../environments/environment';
     IonicModule.forRoot(),
     AppRoutingModule,
     FormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+    // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    Camera,
+    // StatusBar,
+    // SplashScreen,
+    // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

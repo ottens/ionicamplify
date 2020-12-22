@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { DataStore, Predicates } from '@aws-amplify/datastore';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+// import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+// import { StatusBar } from '@ionic-native/status-bar/ngx';
 // import { Hub } from 'aws-amplify';
 // import * as Observable from 'zen-observable';
-import { Todo } from '../models';
+
+import { Todo } from "../models";
 
 // import { APIService } from './API.service';
 
@@ -18,17 +19,17 @@ import { Todo } from '../models';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  subscription;
   todos: Array<Todo>;
   newTodo: '';
-  subscription;
 
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    // private platform: Platform,
+    // private splashScreen: SplashScreen,
+    // private statusBar: StatusBar,
     // private apiService: APIService,
   ) {
-    // this.initializeApp();
+     this.initializeApp();
   }
 
   loadMessages() {
@@ -44,9 +45,14 @@ export class AppComponent implements OnInit {
     this.loadMessages();
   }
   initializeApp() {
-    this.platform.ready().then(async () => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+    this.subscription = DataStore.observe(Todo).subscribe(msg => {
+      console.log(msg.model, msg.opType, msg.element);
+      this.loadMessages();
+
+});
+    // this.platform.ready().then(async () => {
+    //   this.statusBar.styleDefault();
+    //   this.splashScreen.hide();
       // await DataStore.save<Todo>(new Todo({
       // name: 'dd',
       // description: 'testing'
@@ -68,8 +74,9 @@ export class AppComponent implements OnInit {
       //   const data = (evt as any).value.data.onCreateTodo;
       //   this.todos = [...this.todos, data];
       // });
-    });
+    // });
   }
+  
   async createTodo() {
     console.log('---', this.newTodo);
     // this.apiService.CreateTodo({
@@ -82,7 +89,13 @@ export class AppComponent implements OnInit {
     }));
     this.loadMessages();
   }
-  deleteTodo(id) {
-    this.apiService.DeleteTodo({ id });
+  async  deleteTodo(id) {
+    const toDelete = await DataStore.query(Todo, id);
+    DataStore.delete(toDelete);
+    this.loadMessages();
+  }
+  async reloadTodos() {
+    await DataStore.start();
+    this.loadMessages();
   }
 }

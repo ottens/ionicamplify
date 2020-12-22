@@ -14,6 +14,7 @@ export type CreateTodoInput = {
   name: string;
   description?: string | null;
   status?: boolean | null;
+  _version?: number | null;
 };
 
 export type ModelTodoConditionInput = {
@@ -76,10 +77,12 @@ export type UpdateTodoInput = {
   name?: string | null;
   description?: string | null;
   status?: boolean | null;
+  _version?: number | null;
 };
 
 export type DeleteTodoInput = {
   id?: string | null;
+  _version?: number | null;
 };
 
 export type ModelTodoFilterInput = {
@@ -114,6 +117,9 @@ export type CreateTodoMutation = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
@@ -125,6 +131,9 @@ export type UpdateTodoMutation = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
@@ -136,9 +145,31 @@ export type DeleteTodoMutation = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
+};
+
+export type SyncTodosQuery = {
+  __typename: "ModelTodoConnection";
+  items: Array<{
+    __typename: "Todo";
+    id: string;
+    name: string;
+    description: string | null;
+    status: boolean | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    owner: string | null;
+  } | null> | null;
+  nextToken: string | null;
+  startedAt: number | null;
 };
 
 export type GetTodoQuery = {
@@ -147,6 +178,9 @@ export type GetTodoQuery = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
@@ -160,11 +194,15 @@ export type ListTodosQuery = {
     name: string;
     description: string | null;
     status: boolean | null;
+    _version: number;
+    _deleted: boolean | null;
+    _lastChangedAt: number;
     createdAt: string;
     updatedAt: string;
     owner: string | null;
   } | null> | null;
   nextToken: string | null;
+  startedAt: number | null;
 };
 
 export type OnCreateTodoSubscription = {
@@ -173,6 +211,9 @@ export type OnCreateTodoSubscription = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
@@ -184,6 +225,9 @@ export type OnUpdateTodoSubscription = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
@@ -195,6 +239,9 @@ export type OnDeleteTodoSubscription = {
   name: string;
   description: string | null;
   status: boolean | null;
+  _version: number;
+  _deleted: boolean | null;
+  _lastChangedAt: number;
   createdAt: string;
   updatedAt: string;
   owner: string | null;
@@ -215,6 +262,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -242,6 +292,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -269,6 +322,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -285,6 +341,50 @@ export class APIService {
     )) as any;
     return <DeleteTodoMutation>response.data.deleteTodo;
   }
+  async SyncTodos(
+    filter?: ModelTodoFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncTodosQuery> {
+    const statement = `query SyncTodos($filter: ModelTodoFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncTodos(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            name
+            description
+            status
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncTodosQuery>response.data.syncTodos;
+  }
   async GetTodo(id: string): Promise<GetTodoQuery> {
     const statement = `query GetTodo($id: ID!) {
         getTodo(id: $id) {
@@ -293,6 +393,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -320,11 +423,15 @@ export class APIService {
             name
             description
             status
+            _version
+            _deleted
+            _lastChangedAt
             createdAt
             updatedAt
             owner
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -353,6 +460,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -372,6 +482,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -391,6 +504,9 @@ export class APIService {
           name
           description
           status
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
