@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "io.ionic.starterfm",
   "appName": "myAmplifyProject",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -19,9 +19,5 @@
       "SplashScreen": "screen",
       "SplashScreenDelay": "3000"
     }
-  },
-  "server": {
-    "url": "http://192.168.50.117:8100",
-    "cleartext": true
   }
 }

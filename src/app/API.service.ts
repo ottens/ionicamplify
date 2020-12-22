@@ -13,11 +13,13 @@ export type CreateTodoInput = {
   id?: string | null;
   name: string;
   description?: string | null;
+  status?: boolean | null;
 };
 
 export type ModelTodoConditionInput = {
   name?: ModelStringInput | null;
   description?: ModelStringInput | null;
+  status?: ModelBooleanInput | null;
   and?: Array<ModelTodoConditionInput | null> | null;
   or?: Array<ModelTodoConditionInput | null> | null;
   not?: ModelTodoConditionInput | null;
@@ -62,10 +64,18 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null;
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null;
+  eq?: boolean | null;
+  attributeExists?: boolean | null;
+  attributeType?: ModelAttributeTypes | null;
+};
+
 export type UpdateTodoInput = {
   id: string;
   name?: string | null;
   description?: string | null;
+  status?: boolean | null;
 };
 
 export type DeleteTodoInput = {
@@ -76,6 +86,7 @@ export type ModelTodoFilterInput = {
   id?: ModelIDInput | null;
   name?: ModelStringInput | null;
   description?: ModelStringInput | null;
+  status?: ModelBooleanInput | null;
   and?: Array<ModelTodoFilterInput | null> | null;
   or?: Array<ModelTodoFilterInput | null> | null;
   not?: ModelTodoFilterInput | null;
@@ -102,8 +113,10 @@ export type CreateTodoMutation = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 export type UpdateTodoMutation = {
@@ -111,8 +124,10 @@ export type UpdateTodoMutation = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 export type DeleteTodoMutation = {
@@ -120,8 +135,10 @@ export type DeleteTodoMutation = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 export type GetTodoQuery = {
@@ -129,8 +146,10 @@ export type GetTodoQuery = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 export type ListTodosQuery = {
@@ -140,8 +159,10 @@ export type ListTodosQuery = {
     id: string;
     name: string;
     description: string | null;
+    status: boolean | null;
     createdAt: string;
     updatedAt: string;
+    owner: string | null;
   } | null> | null;
   nextToken: string | null;
 };
@@ -151,8 +172,10 @@ export type OnCreateTodoSubscription = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 export type OnUpdateTodoSubscription = {
@@ -160,8 +183,10 @@ export type OnUpdateTodoSubscription = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 export type OnDeleteTodoSubscription = {
@@ -169,8 +194,10 @@ export type OnDeleteTodoSubscription = {
   id: string;
   name: string;
   description: string | null;
+  status: boolean | null;
   createdAt: string;
   updatedAt: string;
+  owner: string | null;
 };
 
 @Injectable({
@@ -187,8 +214,10 @@ export class APIService {
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -212,8 +241,10 @@ export class APIService {
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -237,8 +268,10 @@ export class APIService {
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -259,8 +292,10 @@ export class APIService {
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -284,8 +319,10 @@ export class APIService {
             id
             name
             description
+            status
             createdAt
             updatedAt
+            owner
           }
           nextToken
         }
@@ -309,14 +346,16 @@ export class APIService {
     SubscriptionResponse<OnCreateTodoSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnCreateTodo {
-        onCreateTodo {
+      `subscription OnCreateTodo($owner: String!) {
+        onCreateTodo(owner: $owner) {
           __typename
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`
     )
@@ -326,14 +365,16 @@ export class APIService {
     SubscriptionResponse<OnUpdateTodoSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnUpdateTodo {
-        onUpdateTodo {
+      `subscription OnUpdateTodo($owner: String!) {
+        onUpdateTodo(owner: $owner) {
           __typename
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`
     )
@@ -343,14 +384,16 @@ export class APIService {
     SubscriptionResponse<OnDeleteTodoSubscription>
   > = API.graphql(
     graphqlOperation(
-      `subscription OnDeleteTodo {
-        onDeleteTodo {
+      `subscription OnDeleteTodo($owner: String!) {
+        onDeleteTodo(owner: $owner) {
           __typename
           id
           name
           description
+          status
           createdAt
           updatedAt
+          owner
         }
       }`
     )

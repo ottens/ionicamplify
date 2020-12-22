@@ -9,10 +9,15 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
+      <ion-input placeholder="ToDo" [(ngModel)]="newTodo"></ion-input>
       <ion-button (click)="createTodo()">Add Data</ion-button>
       <ion-list>
         <ion-item *ngFor="let item of todos">
-          <p>{{item.name}} - {{item.description}}</p>
+          <ion-label>{{item.name}} - {{item.description}}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="item.status"></ion-checkbox>
+          <ion-button fill="clear" (click)="deleteTodo(item.id)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
         </ion-item>
       </ion-list>
       <amplify-sign-out></amplify-sign-out>
