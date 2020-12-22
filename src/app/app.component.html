@@ -1,14 +1,21 @@
 <!-- <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app> -->
-<ion-app>
-  <amplify-authenticator>
-    <ion-button (click)="createTodo()">Add Data</ion-button>
-    <ion-list>
-      <ion-item *ngFor="let item of todos">
-        <p>{{item.name}} - {{item.description}}</p>
-      </ion-item>
-    </ion-list>
-    <amplify-sign-out></amplify-sign-out>
-  </amplify-authenticator>
-</ion-app>
+<amplify-authenticator>
+  <ion-app>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Header</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-button (click)="createTodo()">Add Data</ion-button>
+      <ion-list>
+        <ion-item *ngFor="let item of todos">
+          <p>{{item.name}} - {{item.description}}</p>
+        </ion-item>
+      </ion-list>
+      <amplify-sign-out></amplify-sign-out>
+    </ion-content>
+  </ion-app>
+</amplify-authenticator>
