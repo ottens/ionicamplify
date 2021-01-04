@@ -1,5 +1,7 @@
-<p>
-  camera works!
-        <ion-button (click)="takePicture()">Click</ion-button>
-
-</p>
+<ion-item>
+  <ion-button fill="clear" (click)="takePicture()">
+    <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+  </ion-button>
+</ion-item>
+<!-- <img *ngIf="todo.fileName" [src]="todo.fileName" width="60" height="60" /> -->
+<ion-item><img *ngIf="image" [src]="image" /></ion-item>

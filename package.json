@@ -6,10 +6,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npx jetifier && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "npx jetifier"
   },
   "private": true,
   "dependencies": {
@@ -22,8 +23,10 @@
     "@angular/service-worker": "~10.0.0",
     "@aws-amplify/datastore": "^2.9.2",
     "@aws-amplify/ui-angular": "^0.4.16",
+    "@capacitor/android": "^2.4.5",
     "@capacitor/core": "2.4.5",
     "@capacitor/ios": "^2.4.5",
+    "@ionic-enterprise/camera": "^5.0.0",
     "@ionic-native/camera": "^5.30.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/splash-screen": "^5.0.0",
@@ -33,6 +36,7 @@
     "cordova-plugin-camera": "^5.0.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
+    "uuid": "^8.3.2",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
@@ -49,6 +53,7 @@
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
+    "jetifier": "^1.6.6",
     "karma": "~5.0.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",

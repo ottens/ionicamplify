@@ -14,6 +14,9 @@ export type CreateTodoInput = {
   name: string;
   description?: string | null;
   status?: boolean | null;
+  createdAt?: string | null;
+  hasPhoto?: boolean | null;
+  fileName?: string | null;
   _version?: number | null;
 };
 
@@ -21,6 +24,9 @@ export type ModelTodoConditionInput = {
   name?: ModelStringInput | null;
   description?: ModelStringInput | null;
   status?: ModelBooleanInput | null;
+  createdAt?: ModelStringInput | null;
+  hasPhoto?: ModelBooleanInput | null;
+  fileName?: ModelStringInput | null;
   and?: Array<ModelTodoConditionInput | null> | null;
   or?: Array<ModelTodoConditionInput | null> | null;
   not?: ModelTodoConditionInput | null;
@@ -77,6 +83,9 @@ export type UpdateTodoInput = {
   name?: string | null;
   description?: string | null;
   status?: boolean | null;
+  createdAt?: string | null;
+  hasPhoto?: boolean | null;
+  fileName?: string | null;
   _version?: number | null;
 };
 
@@ -90,6 +99,9 @@ export type ModelTodoFilterInput = {
   name?: ModelStringInput | null;
   description?: ModelStringInput | null;
   status?: ModelBooleanInput | null;
+  createdAt?: ModelStringInput | null;
+  hasPhoto?: ModelBooleanInput | null;
+  fileName?: ModelStringInput | null;
   and?: Array<ModelTodoFilterInput | null> | null;
   or?: Array<ModelTodoFilterInput | null> | null;
   not?: ModelTodoFilterInput | null;
@@ -117,10 +129,12 @@ export type CreateTodoMutation = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -131,10 +145,12 @@ export type UpdateTodoMutation = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -145,10 +161,12 @@ export type DeleteTodoMutation = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -161,10 +179,12 @@ export type SyncTodosQuery = {
     name: string;
     description: string | null;
     status: boolean | null;
+    createdAt: string | null;
+    hasPhoto: boolean | null;
+    fileName: string | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
-    createdAt: string;
     updatedAt: string;
     owner: string | null;
   } | null> | null;
@@ -178,10 +198,12 @@ export type GetTodoQuery = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -194,10 +216,12 @@ export type ListTodosQuery = {
     name: string;
     description: string | null;
     status: boolean | null;
+    createdAt: string | null;
+    hasPhoto: boolean | null;
+    fileName: string | null;
     _version: number;
     _deleted: boolean | null;
     _lastChangedAt: number;
-    createdAt: string;
     updatedAt: string;
     owner: string | null;
   } | null> | null;
@@ -211,10 +235,12 @@ export type OnCreateTodoSubscription = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -225,10 +251,12 @@ export type OnUpdateTodoSubscription = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -239,10 +267,12 @@ export type OnDeleteTodoSubscription = {
   name: string;
   description: string | null;
   status: boolean | null;
+  createdAt: string | null;
+  hasPhoto: boolean | null;
+  fileName: string | null;
   _version: number;
   _deleted: boolean | null;
   _lastChangedAt: number;
-  createdAt: string;
   updatedAt: string;
   owner: string | null;
 };
@@ -262,10 +292,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }
@@ -292,10 +324,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }
@@ -322,10 +356,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }
@@ -356,10 +392,12 @@ export class APIService {
             name
             description
             status
+            createdAt
+            hasPhoto
+            fileName
             _version
             _deleted
             _lastChangedAt
-            createdAt
             updatedAt
             owner
           }
@@ -393,10 +431,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }
@@ -423,10 +463,12 @@ export class APIService {
             name
             description
             status
+            createdAt
+            hasPhoto
+            fileName
             _version
             _deleted
             _lastChangedAt
-            createdAt
             updatedAt
             owner
           }
@@ -460,10 +502,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }
@@ -482,10 +526,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }
@@ -504,10 +550,12 @@ export class APIService {
           name
           description
           status
+          createdAt
+          hasPhoto
+          fileName
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
           owner
         }

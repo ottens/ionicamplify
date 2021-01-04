@@ -1,28 +1,38 @@
 <!-- <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app> -->
-<amplify-authenticator>
-  <ion-app>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Header</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-input placeholder="ToDo" [(ngModel)]="newTodo"></ion-input>
-      <ion-button (click)="createTodo()">Add Todo</ion-button>
-      <ion-button (click)="reloadTodos()">Reload</ion-button>
-      <ion-list>
-        <ion-item *ngFor="let item of todos">
-          <ion-label>{{item.name}} - {{item.description}}</ion-label>
-          <ion-checkbox slot="start" [(ngModel)]="item.status"></ion-checkbox>
-          <ion-button fill="clear" (click)="deleteTodo(item.id)">
-            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-list>
-      <app-camera></app-camera>
-      <amplify-sign-out></amplify-sign-out>
-    </ion-content>
-  </ion-app>
-</amplify-authenticator>
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Ionic - Angular - AWS Amplify</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input placeholder="Add Todo" [(ngModel)]="newTodo" (keyup)="handleKeyUp($event)"></ion-input>
+      <ion-button (click)="createTodo()" slot="end">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <!-- <ion-button (click)="reloadTodos()">
+        <ion-icon slot="icon-only" name="reload"></ion-icon>
+      </ion-button> -->
+    <ion-list>
+      <ion-item *ngFor="let item of todos.slice(0).reverse(); let index = index">
+        <ion-label>{{item.name}}</ion-label>
+        <ion-checkbox slot="start" [checked]="item.status" (click)="updateTodo(item)">
+        </ion-checkbox>
+
+        <!-- <app-camera [todo]="item" (updatingTodo)='updateTodo($event)'></app-camera> -->
+        <ion-button fill="clear" (click)="deleteTodo(item.id)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+        <!-- <ion-icon *ngIf="item.hasPhoto" slot="icon-only" name="trash-outline"></ion-icon> -->
+      </ion-item>
+    </ion-list>
+    <app-camera></app-camera>
+
+    <ion-button expand="full" fill="clear" (click)="signOut()">Sign out</ion-button>
+    <!-- <ion-button expand="full" fill="clear" (click)="signOutOfAll()">Global sign out</ion-button> -->
+  </ion-content>
+</ion-app>

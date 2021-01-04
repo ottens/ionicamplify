@@ -5,10 +5,12 @@ subscription OnCreateTodo($owner: String!) {
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }
@@ -19,10 +21,12 @@ subscription OnUpdateTodo($owner: String!) {
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }
@@ -33,10 +37,12 @@ subscription OnDeleteTodo($owner: String!) {
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }

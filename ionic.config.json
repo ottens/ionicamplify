@@ -2,7 +2,16 @@
   "name": "myAmplifyProject",
   "integrations": {
     "cordova": {},
-    "capacitor": {}
+    "capacitor": {},
+    "enterprise": {
+      "keyId": 1568,
+      "productKey": "key_de6c093dcec647448b2009a0d9f90bee",
+      "appId": "4294bf0b",
+      "orgId": "4aa9d559-ec1e-4277-a45a-1b38b745b53f",
+      "registries": [
+        "@ionic-enterprise;https://registry.ionicframework.com/"
+      ]
+    }
   },
   "type": "angular",
   "id": "4294bf0b"

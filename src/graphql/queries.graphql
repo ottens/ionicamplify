@@ -16,10 +16,12 @@ query SyncTodos(
       name
       description
       status
+      createdAt
+      hasPhoto
+      fileName
       _version
       _deleted
       _lastChangedAt
-      createdAt
       updatedAt
       owner
     }
@@ -33,10 +35,12 @@ query GetTodo($id: ID!) {
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }
@@ -52,10 +56,12 @@ query ListTodos(
       name
       description
       status
+      createdAt
+      hasPhoto
+      fileName
       _version
       _deleted
       _lastChangedAt
-      createdAt
       updatedAt
       owner
     }

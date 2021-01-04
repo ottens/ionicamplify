@@ -8,10 +8,12 @@ mutation CreateTodo(
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }
@@ -25,10 +27,12 @@ mutation UpdateTodo(
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }
@@ -42,10 +46,12 @@ mutation DeleteTodo(
     name
     description
     status
+    createdAt
+    hasPhoto
+    fileName
     _version
     _deleted
     _lastChangedAt
-    createdAt
     updatedAt
     owner
   }

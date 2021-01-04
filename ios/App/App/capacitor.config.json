@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starterfm",
+  "appId": "com.purefunction.ionictodo",
   "appName": "myAmplifyProject",
   "bundledWebRuntime": false,
   "npmClient": "npm",

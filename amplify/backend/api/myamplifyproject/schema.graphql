@@ -3,4 +3,7 @@ type Todo @model @auth(rules: [{ allow: owner, operations: [create, read, update
   name: String!
   description: String
   status: Boolean
+  createdAt: AWSDateTime
+  hasPhoto: Boolean
+  fileName: String
 }
