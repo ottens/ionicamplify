@@ -1,6 +1,3 @@
-<!-- <ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app> -->
 <ion-app>
   <ion-header>
     <ion-toolbar>
@@ -8,31 +5,24 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-item>
-      <ion-input placeholder="Add Todo" [(ngModel)]="newTodo" (keyup)="handleKeyUp($event)"></ion-input>
-      <ion-button (click)="createTodo()" slot="end">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
-      </ion-button>
-    </ion-item>
-    <!-- <ion-button (click)="reloadTodos()">
-        <ion-icon slot="icon-only" name="reload"></ion-icon>
-      </ion-button> -->
-    <ion-list>
-      <ion-item *ngFor="let item of todos.slice(0).reverse(); let index = index">
-        <ion-label>{{item.name}}</ion-label>
-        <ion-checkbox slot="start" [checked]="item.status" (click)="updateTodo(item)">
-        </ion-checkbox>
-
-        <!-- <app-camera [todo]="item" (updatingTodo)='updateTodo($event)'></app-camera> -->
-        <ion-button fill="clear" (click)="deleteTodo(item.id)">
-          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    <amplify-authenticator>
+      <ion-item>
+        <ion-input placeholder="Add Todo" [(ngModel)]="newTodo" (keyup)="handleKeyUp($event)"></ion-input>
+        <ion-button (click)="createTodo()" slot="end">
+          <ion-icon slot="icon-only" name="add"></ion-icon>
         </ion-button>
-        <!-- <ion-icon *ngIf="item.hasPhoto" slot="icon-only" name="trash-outline"></ion-icon> -->
       </ion-item>
-    </ion-list>
-    <app-camera></app-camera>
-
-    <ion-button expand="full" fill="clear" (click)="signOut()">Sign out</ion-button>
-    <!-- <ion-button expand="full" fill="clear" (click)="signOutOfAll()">Global sign out</ion-button> -->
+      <ion-list>
+        <ion-item *ngFor="let item of todos.slice(0).reverse(); let index = index">
+          <ion-label>{{item.name}}</ion-label>
+          <ion-checkbox slot="start" [checked]="item.status" (click)="updateTodo(item)">
+          </ion-checkbox>
+          <ion-button fill="clear" (click)="deleteTodo(item.id)">
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full" fill="clear" (click)="signOut()">Sign out</ion-button>
+    </amplify-authenticator>
   </ion-content>
 </ion-app>
