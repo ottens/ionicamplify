@@ -24,7 +24,13 @@ The Ionic framework is a well established JavaScript framework that uses Cordova
 Install Expo CLI
 
 ```zsh
-npm install -g expo-cli
+npm install -g @ionic/cli
+```
+
+Install Amplify CLI
+
+```zsh
+npm install -g @aws-amplify/cli
 ```
 
 Install dependencies
@@ -60,10 +66,10 @@ amplify push
 - ? Are you sure you want to continue? **Yes**
 - ? Do you want to update code for your updated GraphQL API **No**
 
-Start Expo
+Start Ionic
 
 ```zsh
-expo start
+ionic serve
 ```
 
 There is an issue with Ionic 4 and Angular 8 with the web version (used for rapid development). To prevent "uncaught ReferenceError: global is not defined" follow the instructions here: https://stackoverflow.com/questions/57586472/ionic-4-angular-8-uncaught-referenceerror-global-is-not-defined
